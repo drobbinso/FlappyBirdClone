@@ -12,11 +12,12 @@ public class Bird : MonoBehaviour {
 
     public float Force;
     public Text Score;
-
+    public Text MaxScore;
 
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        MaxScore.text = string.Format("Max Score: {0}", PlayerPrefs.GetInt("maxscore", 0));
     }
 
     // Update is called once per frame
@@ -37,12 +38,17 @@ public class Bird : MonoBehaviour {
     {
         GetComponent<Renderer>().material.color = new Color(1, 0, 0);
         _dead = true;
+        var maxScore = PlayerPrefs.GetInt("maxscore", 0);
+        if (_scoreValue > maxScore)
+            PlayerPrefs.SetInt("maxscore", _scoreValue);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        //Debug.Log($"got a point {_score}");
-        _scoreValue++;
-        Score.text = string.Format("Score: {0}", _scoreValue);
+        if (!_dead)
+        {
+            _scoreValue++;
+            Score.text = string.Format("Score: {0}", _scoreValue);
+        }
     }
 }
