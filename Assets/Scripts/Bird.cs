@@ -25,4 +25,14 @@ public class Bird : MonoBehaviour {
             _rigidbody.velocity = new Vector3(0, Force, 0);
         }
 	}
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GetComponent<Renderer>().material.color = new Color(1, 0, 0);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("got a point");
+    }
 }
