@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Bird : MonoBehaviour {
@@ -26,6 +27,10 @@ public class Bird : MonoBehaviour {
             //_rigidbody.AddForce(new Vector3(0, 5, 0), ForceMode.VelocityChange);
             _rigidbody.velocity = new Vector3(0, Force, 0);
         }
+        if (_dead && Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene("game");
+        }
 	}
 
     private void OnCollisionEnter(Collision collision)
@@ -34,7 +39,7 @@ public class Bird : MonoBehaviour {
         _dead = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         //Debug.Log($"got a point {_score}");
         _scoreValue++;
