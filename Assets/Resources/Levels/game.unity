@@ -488,6 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Force: 10
+  Score: {fileID: 1778315297}
 --- !u!1 &1778315295
 GameObject:
   m_ObjectHideFlags: 0
